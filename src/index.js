@@ -3,6 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import pool from './config/db.config.js';
 
+import userRoutes from './routes/userRoutes.js';
+
 dotenv.config();
 
 const app = express();
@@ -11,6 +13,7 @@ const port = process.env.PORT || 3001;
 app.use(express.json());
 app.use(cors());
 
+app.use('/api', userRoutes);
 
 app.get('/', async(req, res) => {
     try{
@@ -18,7 +21,7 @@ app.get('/', async(req, res) => {
         res.send(result.rows[0].current_database); 
     }catch(err){
         console.log(err);
-    }
+    } 
 });
 
 app.listen(port, () => {
