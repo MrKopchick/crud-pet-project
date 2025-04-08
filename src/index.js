@@ -5,6 +5,8 @@ import pool from './config/db.config.js';
 
 import userRoutes from './routes/userRoutes.js';
 
+import errorHandling from './middlewares/errorHandler.js';  
+
 dotenv.config();
 
 const app = express();
@@ -14,6 +16,8 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/api', userRoutes);
+
+app.use(errorHandling);
 
 app.get('/', async(req, res) => {
     try{
